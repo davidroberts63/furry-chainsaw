@@ -1,8 +1,8 @@
-const expectedCaches = ['v13'];
+const expectedCaches = ['v14'];
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open('v13').then(function(cache) {
+    caches.open('v14').then(function(cache) {
       return cache.addAll([
         '/',
         '/index.html',
