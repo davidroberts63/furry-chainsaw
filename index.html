@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Mini Form</title>
+
+	<link rel="stylesheet" href="assets/form-mini.css">
+
+    <style>
+      #qrcode div {
+      }
+
+      #qrcode {
+        width: 256px;
+        margin-top:15px;
+        margin-left: auto;
+        margin-right: auto;
+        display: none;
+      }
+
+      #qrcode span {
+          margin-top: 1em;
+      }
+
+      .main-content, footer {
+          margin-top: 1em;
+      }
+    </style>
+</head>
+
+    <div class="main-content">
+
+        <!-- You only need this form and the form-mini.css -->
+
+        <div id="qrcode">
+            <div id="code"></div>
+            <span id="message">Nothing</span>
+            <div>Click/touch goes to form</div>
+        </div>
+
+        <div class="form-mini-container" id="form">
+
+            <h1>Attendee QR code generator</h1>
+
+            <form class="form-mini">
+
+                <div class="form-row">
+                    <input type="text" id="name" name="name" placeholder="Your Name">
+                </div>
+
+                <div class="form-row">
+                    <input type="email" id="email" name="email" placeholder="Your Email">
+                </div>
+
+                <div class="form-row">
+                    <label>
+                        <select name="dropdown">
+                            <option>Choose an option</option>
+                            <option>Option One</option>
+                            <option>Option Two</option>
+                            <option>Option Three</option>
+                            <option>Option Four</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="form-row">
+                    <label class="form-checkbox">
+                        <input type="checkbox" name="checkbox" checked>
+                        <span>Checkbox</span>
+                    </label>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-radio-buttons">
+
+                        <div>
+                            <label>
+                                <input type="radio" name="radio">
+                                <span>Radio option 1</span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <label>
+                                <input type="radio" name="radio">
+                                <span>Radio option 2</span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <label>
+                                <input type="radio" name="radio">
+                                <span>Radio option 3</span>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-row form-last-row">
+                    <span>Please respect the vendors, use real data.</span>
+                    <button type="submit" id="submit">Generate</button>
+                </div>
+
+                <footer>
+                    By <a href="https://twitter.com/davidroberts63">@davidroberts63</a>
+                    On <a href="https://github.com/davidroberts63/furry-chainsaw">Github</a>
+                </footer>
+            </form>
+
+        </div>
+
+
+    </div>
+
+</body>
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+<script>
+    var qrcode = new QRCode("code");
+ 
+    function makeCode () {
+        // Get text data to 'encode'.	
+        var elText = document.getElementById("name");
+
+        var message = elText.value
+
+        if (!message) {
+            alert("Enter values!");
+            elText.focus();
+            return;
+        }
+
+        qrcode.makeCode(message);
+
+        document.getElementById("form").style.display = "none";
+        document.getElementById("qrcode").style.display = "block";
+    }
+
+    document.getElementById("submit").addEventListener("click", function(e) {
+        e.preventDefault();
+        makeCode();
+    });
+
+    document.getElementById("qrcode").addEventListener("click", function() {
+        document.getElementById("form").style.display = "block";
+        this.style.display = "none";
+    })
+
+</script>
+</html>
