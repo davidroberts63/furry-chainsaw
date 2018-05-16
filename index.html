@@ -104,13 +104,15 @@
                 </div>
 
                 <div class="form-row form-last-row">
-                    <span>Please respect the vendors, use real data.</span>
+                    <span>Please respect the vendors.<br/>Use real data FD.</span>
                     <button type="submit" id="submit">Generate</button>
                 </div>
 
                 <footer>
                     By <a href="https://twitter.com/davidroberts63">@davidroberts63</a>
                     On <a href="https://github.com/davidroberts63/furry-chainsaw">Github</a>
+                    <br/>
+                    To update, navigate away (github or twitter links above) come back here, then refresh.
                 </footer>
             </form>
 
@@ -124,7 +126,7 @@
 <script>
     if ('serviceWorker' in navigator) {
         console.log("Registering Service worker w/o scope");
-        navigator.serviceWorker.register('/sw-test/sw.js')
+        navigator.serviceWorker.register('/sw.js')
             .then(function(reg) {
                 if(reg.installing) {
                     console.log('Service worker installing');
@@ -133,6 +135,8 @@
                 } else if(reg.active) {
                     console.log('Service worker active');
                 }
+                console.log("Updating");
+                reg.update();
             })
             .catch(function(error) {
                 // registration failed

@@ -1,11 +1,30 @@
+const expectedCaches = ['v13'];
+
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open('v1').then(function(cache) {
+    caches.open('v13').then(function(cache) {
       return cache.addAll([
+        '/',
         '/index.html',
-        '/assets/form-mini.css' //,
-        //'https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js'
+        '/assets/form-mini.css',
+        'https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js'
       ]);
+    })
+  );
+});
+
+self.addEventListener('activate', event => {
+  // delete any caches that aren't in expectedCaches
+  // which will get rid of static-v1
+  event.waitUntil(
+    caches.keys().then(keys => Promise.all(
+      keys.map(key => {
+        if (!expectedCaches.includes(key)) {
+          return caches.delete(key);
+        }
+      })
+    )).then(() => {
+      console.log('Next version now ready to handle fetches!');
     })
   );
 });
