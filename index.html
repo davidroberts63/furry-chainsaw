@@ -27,6 +27,10 @@
           margin-top: 1em;
       }
 
+      #message {
+          margin-top: 1em;
+          font-size: 16pt;
+      }
       .main-content, footer {
           margin-top: 1em;
       }
@@ -39,6 +43,7 @@
 
         <div id="qrcode">
             <div id="code"></div>
+            <div>Gluecon Colorado</div>
             <span id="message">Nothing</span>
             <div>Click/touch goes to form</div>
         </div>
@@ -50,57 +55,11 @@
             <form class="form-mini">
 
                 <div class="form-row">
-                    <input type="text" id="name" name="name" placeholder="Your Name">
+                    <input type="text" id="name" name="name" placeholder="Vendor name">
                 </div>
 
                 <div class="form-row">
-                    <input type="email" id="email" name="email" placeholder="Your Email">
-                </div>
-
-                <div class="form-row">
-                    <label>
-                        <select name="dropdown">
-                            <option>Choose an option</option>
-                            <option>Option One</option>
-                            <option>Option Two</option>
-                            <option>Option Three</option>
-                            <option>Option Four</option>
-                        </select>
-                    </label>
-                </div>
-
-                <div class="form-row">
-                    <label class="form-checkbox">
-                        <input type="checkbox" name="checkbox" checked>
-                        <span>Checkbox</span>
-                    </label>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-radio-buttons">
-
-                        <div>
-                            <label>
-                                <input type="radio" name="radio">
-                                <span>Radio option 1</span>
-                            </label>
-                        </div>
-
-                        <div>
-                            <label>
-                                <input type="radio" name="radio">
-                                <span>Radio option 2</span>
-                            </label>
-                        </div>
-
-                        <div>
-                            <label>
-                                <input type="radio" name="radio">
-                                <span>Radio option 3</span>
-                            </label>
-                        </div>
-
-                    </div>
+                    <input type="email" id="email" name="email" placeholder="Your Email domain">
                 </div>
 
                 <div class="form-row form-last-row">
@@ -148,9 +107,10 @@
  
     function makeCode () {
         // Get text data to 'encode'.	
-        var elText = document.getElementById("name");
+        var vendor = document.getElementById("name").value;
+        var domain = document.getElementById("email").value;
 
-        var message = elText.value
+        var message = vendor + domain
 
         if (!message) {
             alert("Enter values!");
@@ -162,6 +122,7 @@
 
         document.getElementById("form").style.display = "none";
         document.getElementById("qrcode").style.display = "block";
+        document.getElementById("message").innerHTML = message;
     }
 
     document.getElementById("submit").addEventListener("click", function(e) {
