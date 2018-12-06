@@ -1,4 +1,4 @@
 CACHE MANIFEST
 index.html
 assets/form-mini.css
-https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js
+https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js
